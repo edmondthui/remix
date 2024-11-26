@@ -1,4 +1,4 @@
-import styles from "./NewNote.css";
+import styles from "./styles.css";
 
 export default function NewNote() {
   return (

@@ -6,7 +6,7 @@ export const Note = z.object({
   title: z.string(),
   content: z.string(),
 });
-type Note = z.infer<typeof Note>;
+export type Note = z.infer<typeof Note>;
 
 const Notes = z.array(Note);
 
