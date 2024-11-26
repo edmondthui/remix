@@ -1,7 +1,8 @@
 import fs from "fs/promises";
 import { z } from "zod";
 
-const Note = z.object({
+export const Note = z.object({
+  id: z.string(),
   title: z.string(),
   content: z.string(),
 });
