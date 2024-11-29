@@ -1,4 +1,3 @@
-import styles from "./styles.css";
 import { type Note } from "~/data/notes";
 
 interface Props {
@@ -34,8 +33,4 @@ export default function NoteList({ notes }: Props) {
       ))}
     </ul>
   );
-}
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
 }

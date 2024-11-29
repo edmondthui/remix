@@ -1,8 +1,15 @@
-import styles from "./styles.css";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
+import { Message } from "~/data/message";
+import { action } from "~/routes/notes";
 
 export default function NewNote() {
+  const navigation = useNavigation();
+  const data = useActionData<typeof action>();
+  const validatedData = Message.parse(data);
+  const isSubmitting = navigation.state === "submitting";
   return (
-    <form method="post" id="note-form">
+    <Form method="post" action="/notes" id="note-form">
+      {validatedData?.message && <p>{validatedData.message}</p>}
       <p>
         <label htmlFor="title">Title</label>
         <input type="text" id="title" name="title" required />
@@ -12,12 +19,10 @@ export default function NewNote() {
         <textarea id="content" name="content" rows={5} required />
       </p>
       <div className="form-actions">
-        <button>Add Note</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? "Adding..." : "Add Note"}
+        </button>
       </div>
-    </form>
+    </Form>
   );
-}
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
 }
