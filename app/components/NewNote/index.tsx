@@ -1,12 +1,13 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { Message } from "~/data/message";
-import { action } from "~/routes/notes";
+import { action } from "~/routes/notes._index";
 
 export default function NewNote() {
   const navigation = useNavigation();
   const data = useActionData<typeof action>();
   const validatedData = Message.parse(data);
   const isSubmitting = navigation.state === "submitting";
+
   return (
     <Form method="post" action="/notes" id="note-form">
       {validatedData?.message && <p>{validatedData.message}</p>}
@@ -19,7 +20,7 @@ export default function NewNote() {
         <textarea id="content" name="content" rows={5} required />
       </p>
       <div className="form-actions">
-        <button disabled={isSubmitting}>
+        <button disabled={isSubmitting} type="submit">
           {isSubmitting ? "Adding..." : "Add Note"}
         </button>
       </div>

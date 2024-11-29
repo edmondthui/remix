@@ -11,7 +11,9 @@ export type Note = z.infer<typeof Note>;
 const Notes = z.array(Note);
 
 export async function getStoredNotes(): Promise<Note[]> {
-  const rawFileContent = await fs.readFile("notes.json", { encoding: "utf-8" });
+  const rawFileContent = await fs.readFile("notes.json", {
+    encoding: "utf-8",
+  });
   const data = JSON.parse(rawFileContent);
   const storedNotes = Notes.parse(data.notes);
   return storedNotes;
